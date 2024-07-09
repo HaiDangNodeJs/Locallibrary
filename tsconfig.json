@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "dist",
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "baseUrl": "./",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "@src/*": [
+        "src/*"
+      ],
+    },
+    "useUnknownInCatchVariables": false
+  },
+  "include": [
+    "src/**/*.ts",
+    "spec/**/*.ts",
+    "build.ts"
+  ],
+  "exclude": [
+    "src/public/"
+  ]
+}
