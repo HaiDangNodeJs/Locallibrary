@@ -8,11 +8,8 @@ import http from "http";
 
 // Import routers
 import indexRouter from "./routes/index";
-import usersRouter from "./routes/UserRoutes";
-
-
+import { AppDataSource } from "./config/data-source";
 const app = express();
-
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
@@ -26,7 +23,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
 
 app.use(function (req, res, next) {
   next(createError(404));
@@ -40,8 +36,10 @@ app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
   res.render("error");
 });
 
-// HTTP server
-const server = http.createServer(app);
 
-const port = process.env.PORT || 3000;
-server.listen(port, () => console.log(`Server running on port ${port}`));
+AppDataSource.initialize()
+  .then(() => {
+    console.log('Database initialized')
+  })
+  .catch((error) => console.log('Initialized database failed: ', error))
+export default app
