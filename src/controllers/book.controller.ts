@@ -1,6 +1,40 @@
 import { Request, Response, NextFunction } from 'express';
 import asyncHandler from 'express-async-handler';
+import i18next from 'i18next';
+import { AuthorService } from '@src/services/author.service';
+import { BookService } from '@src/services/book.service';
+import { BookInstanceService } from '@src/services/book_instance.service';
+import { GenreService } from '@src/services/genre.service';
 
+const authorService = new AuthorService();
+const bookService = new BookService();
+const bookInstanceService = new BookInstanceService();
+const genreService = new GenreService();
+
+export const index = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
+    const [
+        numAuthors,
+        numBooks,
+        numGenres,
+        numBookInstances,
+        availableBookInstances,
+    ] = await Promise.all([
+        authorService.getIndexData(),
+        bookService.getIndexData(),
+        genreService.getIndexData(),
+        bookInstanceService.getIndexData(),
+        bookInstanceService.getAllBookInstances(),
+    ]);
+
+    res.render('index', {
+        book_count: numBooks,
+        author_count: numAuthors,
+        genre_count: numGenres,
+        book_instance_count: numBookInstances,
+        book_instance_available_count: availableBookInstances,
+        t: i18next.t.bind(i18next)
+    });
+});
 // Hiển thị danh sách tất cả các sách.
 export const getAllBooks = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     res.send('NOT IMPLEMENTED: Book list');
