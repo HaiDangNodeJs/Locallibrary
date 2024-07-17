@@ -37,4 +37,9 @@ app.use(function (err: any, req: Request, res: Response, next: NextFunction) {
 });
 
 
-const port = process.env.PORT || 3000;
+AppDataSource.initialize()
+  .then(() => {
+    console.log('Database initialized')
+  })
+  .catch((error) => console.log('Initialized database failed: ', error))
+export default app
