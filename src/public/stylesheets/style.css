@@ -3,3 +3,12 @@
     padding: 0;
     list-style: none;
 }
+.text-green {
+    color:#06ae2d
+  }
+.text-yellow {
+    color:#facd49
+}
+.text-red{
+    color:#dc3545
+}

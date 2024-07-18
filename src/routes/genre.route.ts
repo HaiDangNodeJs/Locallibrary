@@ -12,13 +12,13 @@ import {
 
 const router = express.Router();
 
-router.get('/genres', getAllGenres);
-router.get('/genre/:id', getGenreDetail);
-router.get('/genre/create', createGenreForm);
-router.post('/genre/create', createGenre);
-router.get('/genre/:id/delete', deleteGenreForm);
-router.post('/genre/:id/delete', deleteGenre);
-router.get('/genre/:id/update', updateGenreForm);
-router.post('/genre/:id/update', updateGenre);
+router.get('/', getAllGenres);
+router.get('/:id', getGenreDetail);
+router.get('/create', createGenreForm);
+router.post('/create', createGenre);
+router.get('/:id/delete', deleteGenreForm);
+router.post('/:id/delete', deleteGenre);
+router.get('/:id/update', updateGenreForm);
+router.post('/:id/update', updateGenre);
 
 export default router;

@@ -9,9 +9,13 @@ export class BookInstanceService {
         return await this.bookInstanceRepository.count();
     }
 
-    async getAllBookInstances() {
-        return await this.bookInstanceRepository.findAndCount({
+    async getIndexBookInstances() {
+        return await this.bookInstanceRepository.count({
             where: { status: BookInstanceStatus.AVAILABLE }
         });
+    }
+
+    async getBookInstanceList() {
+        return this.bookInstanceRepository.find({ relations: ['book'] })
     }
 }

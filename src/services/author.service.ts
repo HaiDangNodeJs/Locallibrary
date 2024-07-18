@@ -7,4 +7,8 @@ export class AuthorService {
     async getIndexData() {
         return await this.authorRepository.count();
     }
+
+    async getAuthorList() {
+        return this.authorRepository.find({ order: { firstName: 'ASC' } })
+    }
 }

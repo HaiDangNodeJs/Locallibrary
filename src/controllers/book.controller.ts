@@ -23,10 +23,11 @@ export const index = asyncHandler(async (req: Request, res: Response, next: Next
         bookService.getIndexData(),
         genreService.getIndexData(),
         bookInstanceService.getIndexData(),
-        bookInstanceService.getAllBookInstances(),
+        bookInstanceService.getIndexBookInstances(),
     ]);
 
     res.render('index', {
+        title: 'home.local_library',
         book_count: numBooks,
         author_count: numAuthors,
         genre_count: numGenres,
@@ -37,7 +38,8 @@ export const index = asyncHandler(async (req: Request, res: Response, next: Next
 });
 // Hiển thị danh sách tất cả các sách.
 export const getAllBooks = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    res.send('NOT IMPLEMENTED: Book list');
+    const books = await bookService.getBooks();
+    res.render('book/index', { books, title: req.t('book.title.listOfBook') });
 });
 
 // Hiển thị chi tiết trang cho một cuốn sách cụ thể.

@@ -1,5 +1,6 @@
 {
     "home": {
+        "local_library": "Thư viện địa phương",
         "welcome": "Chào mừng bạn đến với {{title}}",
         "content": "Nội dung thư viện",
         "record_infor": "Trạng thái thư viện của chúng tôi:",
@@ -22,5 +23,40 @@
         "english": "Tiếng Anh",
         "vietnamese": "Tiếng Việt"
     },
-    "titleListBook": "Danh sách sách"
+    "book": {
+        "title": {
+            "listOfBook": "Danh sách các quyển sách có trong thư viện",
+            "emptyBookList": "Không có quyển sách nào",
+            "summary": "Tóm tắt:",
+            "isbn": "Mã ISBN:",
+            "unknownSummary": "Không có tóm tắt",
+            "unknownIsbn": "Không có mã ISBN"
+        }
+    },
+    "author": {
+        "title": {
+            "unknownAuthor": "Không có tác giả",
+            "listOfAuthor": "Danh sách tác giả",
+            "emptyAuthorList": "Không có tác giả nào"
+        }
+    },
+    "bookInstance": {
+        "title": {
+            "listOfBookInstance": "Danh sách các bản sao sách có trong thư viện",
+            "emptyBookInstanceList": "Không có bản sao sách nào"
+        },
+        "imprint": "Ấn hiệu",
+        "dueBack": "Hạn cuối",
+        "status": {
+            "available": "Có sẵn",
+            "maintenance": "Bảo trì",
+            "loaned": "Đã cho mượn"
+        }
+    },
+    "genre": {
+        "title": {
+            "listOfGenre": "Danh sách thể loại",
+            "emptyGenreList": "Không có thể loại nào"
+        }
+    }
 }
