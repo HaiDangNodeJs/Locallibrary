@@ -7,4 +7,8 @@ export class BookService {
     async getIndexData() {
         return await this.bookRepository.count();
     }
+
+    async getBooks() {
+        return this.bookRepository.find({ order: { title: 'ASC' }, relations: ['author'] })
+    }
 }

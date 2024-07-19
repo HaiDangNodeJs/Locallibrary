@@ -1,9 +1,13 @@
 import { Request, Response, NextFunction } from 'express';
 import asyncHandler from 'express-async-handler';
+import { GenreService } from '../services/genre.service';
+
+const genreService = new GenreService();
 
 // Hiển thị danh sách tất cả các loại.
 export const getAllGenres = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    res.send('NOT IMPLEMENTED: Genre list');
+    const genres = await genreService.getGenreList()
+    res.render('genre/index', { genres, title: 'genre.title.listOfGenre' })
 });
 
 // Hiển thị chi tiết trang cho một loại cụ thể.

@@ -7,4 +7,8 @@ export class GenreService {
     async getIndexData() {
         return await this.genreRepository.count();
     }
+
+    async getGenreList() {
+        return this.genreRepository.find({ order: { name: 'ASC' } })
+    }
 }

@@ -1,9 +1,13 @@
 import { Request, Response, NextFunction } from 'express';
 import asyncHandler from 'express-async-handler';
+import { AuthorService } from '../services/author.service'
+
+const authorService = new AuthorService();
 
 // Lấy danh sách tất cả các tác giả.
 export const getAllAuthors = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    res.send('NOT IMPLEMENTED: Author list');
+    const authors = await authorService.getAuthorList()
+    res.render('author/index', { authors, title: 'author.title.listOfAuthor' })
 });
 
 // Hiển thị chi tiết tác giả.
