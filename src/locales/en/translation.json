@@ -58,5 +58,37 @@
             "listOfGenre": "Genre list",
             "noGenre": "There are no genres"
         }
+    },
+    "error": {
+        "title": "Error",
+        "generic": "An error occurred",
+        "invalidAuthorId": "Invalid author ID parameter",
+        "authorNotFound": "Author not found",
+        "invalidGenreId": "Invalid genre ID parameter",
+        "genreNotFound": "Genre not found",
+        "invalidBookId": "Invalid book ID parameter",
+        "bookNotFound": "Book not found",
+        "invalidBookinstanceId": "Invalid bookinstance ID parameter",
+        "bookinstanceNotFound": "Bookinstance not found"
+    },
+    "detail": {
+        "bookDetail": "Book Detail",
+        "authorDetail": "Author Detail",
+        "genreDetail": "Genre Detail",
+        "bookinstanceDetail": "Book Instance Detail",
+        "authorNoBooks": "This author has no books.",
+        "bookNoInstances": "There are no copies of this book in the library.",
+        "genreNoBooks": "This genre has no books.",
+        "author": "Author",
+        "genre": "Genre",
+        "books": "Books",
+        "title": "Title",
+        "summary": "Summary",
+        "isbn": "ISBN",
+        "copies": "Copies",
+        "imprint": "Imprint",
+        "due_back": "Due back",
+        "id": "ID",
+        "status": "Status"
     }
 }

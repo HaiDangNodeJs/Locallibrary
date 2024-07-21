@@ -18,4 +18,11 @@ export class BookInstanceService {
     async getBookInstanceList() {
         return this.bookInstanceRepository.find({ relations: ['book'] })
     }
+
+    async getBookInstanceById(id: number) {
+        return this.bookInstanceRepository.findOne({
+            where: { id },
+            relations: ['book'],
+        });
+    }
 }

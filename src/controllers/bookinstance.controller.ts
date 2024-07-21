@@ -1,14 +1,32 @@
 import { Request, Response, NextFunction } from 'express';
 import asyncHandler from 'express-async-handler';
-import { BookInstanceService } from '@src/services/book_instance.service';
+import { BookInstanceService } from '../services/book_instance.service';
 import { BookInstanceStatus } from '../enums/book_instance_status';
 
 const bookInstanceService = new BookInstanceService();
 
+const validateBookInstance = async (req: Request, res: Response, next: NextFunction) => {
+    const id = parseInt(req.params.id)
+    if (isNaN(id)) {
+        req.flash('error', 'Invalid book instance id parameter')
+        res.redirect('/bookInstances')
+        return null
+    }
+
+    const bookInstance = await bookInstanceService.getBookInstanceById(id)
+    if (bookInstance === null) {
+        req.flash('error', 'Book instance not found')
+        res.redirect('/bookInstances')
+        return null
+    }
+
+    return bookInstance
+}
+
 // Hiển thị danh sách tất cả các BookInstance.
 export const getAllBookInstances = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const bookInstances = await bookInstanceService.getBookInstanceList()
-    res.render('book_instance/index', {
+    res.render('book_instances/index', {
         bookInstances,
         title: 'bookInstance.title.listOfBookInstance',
         BookInstanceStatus
@@ -17,7 +35,8 @@ export const getAllBookInstances = asyncHandler(async (req: Request, res: Respon
 
 // Hiển thị chi tiết trang cho một BookInstance cụ thể.
 export const getBookInstanceDetail = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    res.send(`NOT IMPLEMENTED: BookInstance detail: ${req.params.id}`);
+    const bookInstance = await validateBookInstance(req, res, next)
+    res.render('book_instances/show', { bookInstance, bookInstanceBooks: bookInstance?.book, BookInstanceStatus })
 });
 
 // Hiển thị form tạo BookInstance mới bằng phương thức GET.

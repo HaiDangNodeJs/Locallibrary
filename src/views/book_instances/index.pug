@@ -1,0 +1,21 @@
+extends ../layout
+
+block content 
+    h1 #{t(title)}
+    if bookInstances.length
+        ul
+        each bookInstance in bookInstances
+            li
+                a(href=`/bookinstances/${bookInstance.id}`) #{bookInstance.imprint} 
+                | - 
+                if bookInstance.status === BookInstanceStatus.AVAILABLE
+                    span.text-green #{t('bookInstance.status.available')} 
+                else if bookInstance.status === BookInstanceStatus.MAINTENANCE
+                    span.text-red #{t('bookInstance.status.maintenance')} 
+                else if bookInstance.status === BookInstanceStatus.LOANED
+                    span.text-yellow #{t('bookInstance.status.loaned')} 
+                else
+                    #{t('bookInstance.status')}
+                | ( #{bookInstance.dueBack ? new Date(bookInstance.dueBack) : ''})
+    else
+        p #{t('noBookInstance')}
