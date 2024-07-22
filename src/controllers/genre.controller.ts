@@ -4,15 +4,34 @@ import { GenreService } from '../services/genre.service';
 
 const genreService = new GenreService();
 
+const validateGenre = async (req: Request, res: Response, next: NextFunction) => {
+    const id = parseInt(req.params.id)
+    if (isNaN(id)) {
+        req.flash('error', 'Invalid genre id parameter')
+        res.redirect('/genres')
+        return null
+    }
+
+    const genre = await genreService.getGenreById(id)
+    if (genre === null) {
+        req.flash('error', 'Genre not found')
+        res.redirect('/genres')
+        return null
+    }
+
+    return genre
+}
+
 // Hiển thị danh sách tất cả các loại.
 export const getAllGenres = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const genres = await genreService.getGenreList()
-    res.render('genre/index', { genres, title: 'genre.title.listOfGenre' })
+    res.render('genres/index', { genres, title: 'genre.title.listOfGenre' })
 });
 
 // Hiển thị chi tiết trang cho một loại cụ thể.
 export const getGenreDetail = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    res.send(`NOT IMPLEMENTED: Genre detail: ${req.params.id}`);
+    const genre = await validateGenre(req, res, next)
+    res.render('genres/show', { genre, genreBooks: genre?.books })
 });
 
 // Hiển thị form tạo loại mới bằng phương thức GET.

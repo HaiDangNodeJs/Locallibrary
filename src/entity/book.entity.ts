@@ -6,24 +6,24 @@ import { SQL_CONSTANTS } from "../constant/db.type.constants";
 
 
 @Entity()
-export default class Book extends BaseEntity{
+export default class Book extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({type: SQL_CONSTANTS.STRING, length: SQL_CONSTANTS.HUNDRED})
+    @Column({ type: SQL_CONSTANTS.STRING, length: SQL_CONSTANTS.HUNDRED })
     title: string;
 
-    @Column({type: SQL_CONSTANTS.STRING, length: SQL_CONSTANTS.THOUSAND, nullable: true})
+    @Column({ type: SQL_CONSTANTS.STRING, length: SQL_CONSTANTS.THOUSAND, nullable: true })
     summary: string;
 
-    @Column({type: SQL_CONSTANTS.STRING, length: SQL_CONSTANTS.HUNDRED, nullable: true })
+    @Column({ type: SQL_CONSTANTS.STRING, length: SQL_CONSTANTS.HUNDRED, nullable: true })
     isbn: string;
 
     @ManyToOne(() => Author)
     @JoinColumn({ name: 'author_id' })
     author: Author;
 
-    @ManyToMany(() => Genre)
+    @ManyToMany(() => Genre, (genres) => genres.books)
     @JoinTable()
     genres: Genre[];
 

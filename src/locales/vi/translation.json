@@ -58,5 +58,37 @@
             "listOfGenre": "Danh sách thể loại",
             "emptyGenreList": "Không có thể loại nào"
         }
+    },
+    "error": {
+        "title": "Lỗi",
+        "generic": "Đã xảy ra lỗi",
+        "invalidAuthorId": "Mã tác giả không hợp lệ",
+        "authorNotFound": "Không tìm thấy tác giả",
+        "invalidGenreId": "Mã thể loại không hợp lệ",
+        "genreNotFound": "Không tìm thấy thể loại",
+        "invalidBookId": "Mã sách không hợp lệ",
+        "bookNotFound": "Không tìm thấy sách",
+        "invalidBookinstanceId": "Mã bản sao sách không hợp lệ",
+        "bookinstanceNotFound": "Không tìm thấy bản sao sách"
+    },
+    "detail": {
+        "bookDetail": "Chi tiết sách",
+        "authorDetail": "Chi tiết tác giả",
+        "genreDetail": "Chi tiết thể loại",
+        "bookinstanceDetail": "Chi tiết bản sao sách",
+        "authorNoBooks": "Tác giả này không có cuốn sách nào.",
+        "bookNoInstances": "Không có bản sao nào của cuốn sách này trong thư viện.",
+        "genreNoBooks": "Thể loại này không có cuốn sách nào.",
+        "author": "Tác giả",
+        "genre": "Thể loại",
+        "books": "Các cuốn sách",
+        "title": "Tiêu đề",
+        "summary": "Tóm tắt",
+        "isbn": "ISBN",
+        "copies": "Bản sao",
+        "imprint": "Ấn bản",
+        "due_back": "Hạn trả",
+        "id": "Mã sách",
+        "status": "Tình trạng"
     }
 }

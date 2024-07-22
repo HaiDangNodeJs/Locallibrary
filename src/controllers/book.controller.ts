@@ -1,15 +1,30 @@
 import { Request, Response, NextFunction } from 'express';
 import asyncHandler from 'express-async-handler';
-import i18next from 'i18next';
-import { AuthorService } from '@src/services/author.service';
-import { BookService } from '@src/services/book.service';
-import { BookInstanceService } from '@src/services/book_instance.service';
-import { GenreService } from '@src/services/genre.service';
+import i18next from '../i18n';
+import { AuthorService } from '../services/author.service';
+import { BookService } from '../services/book.service';
+import { BookInstanceService } from '../services/book_instance.service';
+import { GenreService } from '../services/genre.service';
+import { BookInstanceStatus } from '@src/enums/book_instance_status';
 
 const authorService = new AuthorService();
 const bookService = new BookService();
 const bookInstanceService = new BookInstanceService();
 const genreService = new GenreService();
+
+const validateBook = async (req: Request, res: Response, next: NextFunction) => {
+    const id = parseInt(req.params.id);
+    if (isNaN(id)) {
+        req.flash('error', req.t('error.invalidBookId'));
+        return res.redirect('/error');
+    }
+    const book = await bookService.getBookById(id);
+    if (book === null) {
+        req.flash('error', req.t('error.bookNotFound'));
+        return res.redirect('/error');
+    }
+    return book;
+}
 
 export const index = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const [
@@ -39,12 +54,19 @@ export const index = asyncHandler(async (req: Request, res: Response, next: Next
 // Hiển thị danh sách tất cả các sách.
 export const getAllBooks = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
     const books = await bookService.getBooks();
-    res.render('book/index', { books, title: req.t('book.title.listOfBook') });
+    res.render('books/index', { books, title: req.t('book.title.listOfBook') });
 });
 
 // Hiển thị chi tiết trang cho một cuốn sách cụ thể.
 export const getBookDetail = asyncHandler(async (req: Request, res: Response, next: NextFunction) => {
-    res.send(`NOT IMPLEMENTED: Book detail: ${req.params.id}`);
+    const book = await validateBook(req, res, next)
+    res.render('books/show', {
+        book,
+        bookInstances: book?.bookInstances,
+        bookGenres: book?.genres,
+        bookInstanceStatuses: book?.bookInstances,
+        BookInstanceStatus
+    })
 });
 
 // Hiển thị form tạo sách mới bằng phương thức GET.

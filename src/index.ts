@@ -8,7 +8,13 @@ import 'reflect-metadata';
 import { AppDataSource } from './config/data-source';
 import i18next from './i18n';
 import i18nextMiddleware from 'i18next-http-middleware';
+import session from 'express-session';
+import flash from 'connect-flash'
+require('dotenv').config()
+
 const app = express();
+
+const secret = process.env.SESSION_SECRET || 'secret'
 
 // config pug view engine
 app.set('views', path.join(__dirname, 'views'));
@@ -24,12 +30,27 @@ app.use(express.static(path.join(__dirname, "public")));
 // i18next middleware
 app.use(i18nextMiddleware.handle(i18next));
 
+// flash middleware
+app.use(
+  session({
+    resave: false,
+    saveUninitialized: true,
+    secret: secret
+  })
+)
+
+app.use(flash());
+
+app.use((req, res, next) => {
+  res.locals.messages = req.flash();
+  next();
+})
+
 // config middleware để sử dụng function t
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.locals.t = req.t;
   next();
 });
-
 
 app.use('/', indexRouter);
 

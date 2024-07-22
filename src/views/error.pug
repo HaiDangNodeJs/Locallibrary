@@ -1,7 +1,7 @@
 extends layout
 
 block content
-    h1= t('error.message', { defaultMessage: message })
+    h1= t('error.title', { defaultMessage: message })
     h2= error.status
     h3= t('error.generic', { defaultMessage: "ERROR" })
     pre #{error.stack}
