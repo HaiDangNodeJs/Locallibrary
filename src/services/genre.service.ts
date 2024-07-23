@@ -18,4 +18,24 @@ export class GenreService {
             relations: ['books'],
         });
     };
+
+    async checkGenreExists(name: string) {
+        return this.genreRepository.findOne({ where: { name } });
+    };
+
+    async createGenre(name: string) {
+        const genre = new Genre();
+        genre.name = name;
+
+        return this.genreRepository.save(genre);
+    };
+
+    async deleteGenre(id: number) {
+        return this.genreRepository.delete(id);
+    };
+
+    async updateGenre(genre: Genre, name: string) {
+        genre.name = name;
+        return this.genreRepository.save(genre);
+    };
 }

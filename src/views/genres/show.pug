@@ -9,3 +9,9 @@ block content
             p #{val.summary}
     else
         p #{t('genre.message.emptyBookList')}
+
+    hr
+    p
+        a(href=`/genres/${genre.id}/delete`) #{t('sidebar.delete_genre')}
+    p
+        a(href=`/genres/${genre.id}/update`) #{t('sidebar.update_genre')}

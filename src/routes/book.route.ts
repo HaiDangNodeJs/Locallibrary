@@ -12,10 +12,10 @@ import {
 
 const router = express.Router();
 
-router.get('/', getAllBooks);
-router.get('/:id', getBookDetail);
 router.get('/create', createBookForm);
 router.post('/create', createBook);
+router.get('/', getAllBooks);
+router.get('/:id', getBookDetail);
 router.get('/:id/delete', deleteBookForm);
 router.post('/:id/delete', deleteBook);
 router.get('/:id/update', updateBookForm);

@@ -9,3 +9,6 @@ block content
             p #{value.summary}
     else
         p #{t('book.title.emptyBookList')}
+    hr
+    p
+        a(href=`${author.id}/delete`) #{t('button.delete')}

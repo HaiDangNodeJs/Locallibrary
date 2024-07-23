@@ -45,3 +45,9 @@ block content
           a(href=`/bookinstances/${val.id}`) #{val.id}
     else
       p #{t('bookInstance.emptyBookInstanceList')}
+
+  hr
+  p
+      a(href=`/books/${book.id}/delete`) #{t('sidebar.delete_book')}
+  p
+      a(href=`/books/${book.id}/update`) #{t('sidebar.update_book')}
