@@ -15,3 +15,8 @@ block content
     else
         p #[strong #{t('detail.status')} ]: #{t('bookInstance.status')}
     p #[strong #{t('bookInstance.dueBack')} ]: #{bookInstance.dueBack ? new Date(bookInstance.dueBack) : ''}
+    hr
+    p
+        a(href=`/bookinstances/${bookinstance.id}/delete`) #{t('sidebar.delete_bookinstance')}
+    p
+        a(href=`/bookinstances/${bookinstance.id}/update`) #{t('sidebar.update_bookinstance')}
